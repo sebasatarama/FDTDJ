@@ -9,17 +9,16 @@ private:
 	GLuint programID;
 	GLuint fragmentShaderID;
 	GLuint vertexShaderID;
-
 	void compileShader(const string& shaderPath, GLuint id);
 public:
 	HLSLProgram();
 	~HLSLProgram();
 	int numAtribute;
-	void addAtribute(const string sttributeName);
+	void addAtribute(const string attributeName);
 	void use();
 	void unuse();
 	void compileShaders(const string& vertexShaderFilePath, const string& fragmentShaderFilePath);
-	void  linkShader();
+	void linkShader();
 	GLuint getUniformLocation(const string& name);
 };
 

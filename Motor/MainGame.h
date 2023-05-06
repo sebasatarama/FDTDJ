@@ -14,9 +14,9 @@ private:
 	int height;
 	SDL_Window* window;
 	void init();
-	void processInput();
 	Sprite sprite;
 	Sprite sprite2;
+	void processInput();
 
 public:
 	MainGame();
