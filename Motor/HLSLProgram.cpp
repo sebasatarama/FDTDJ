@@ -14,12 +14,19 @@ HLSLProgram::~HLSLProgram() {
 
 
 void HLSLProgram::addAtribute(const string attributeName) {
-
+	glBindAttribLocation(programID, numAtribute++, attributeName.c_str());
 }
 void HLSLProgram::use() {
-
+	glUseProgram(programID);
+	for (int i = 0; i < numAtribute; i++) {
+		glEnableVertexAttribArray(i);
+	}
 }
 void HLSLProgram::unuse() {
+	glUseProgram(0);
+	for (int i = 0; i < numAtribute; i++) {
+		glEnableVertexAttribArray(i);
+	}
 }
 
 void HLSLProgram::compileShaders(const string& vertexShaderFilePath, const string& fragmentShaderFilePath) {
