@@ -13,6 +13,7 @@ class MainGame
 private:
 	int width;
 	int height;
+	float time;
 	SDL_Window* window;
 	void init();
 	HLSLProgram program;

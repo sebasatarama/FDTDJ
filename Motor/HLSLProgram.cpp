@@ -91,10 +91,13 @@ void HLSLProgram::linkShader() {
 	glDetachShader(programID, fragmentShaderID);
 	glDeleteShader(vertexShaderID);
 	glDeleteShader(fragmentShaderID);
-
-
-
-
 }
 
+GLuint HLSLProgram::getUniformLocation(const string& name) {
+	GLuint location = glGetUniformLocation(programID, name.c_str());
+	if (location == GL_INVALID_INDEX) {
+		fatalError("Uniform " + name + " not found");
+	}
+	return location;
+}
 

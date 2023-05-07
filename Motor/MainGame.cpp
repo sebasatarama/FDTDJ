@@ -6,6 +6,7 @@ using namespace std;
 MainGame::MainGame() {
 	window = nullptr;
 	width = 800;
+	time = 0;
 	height = 600;
 	gameState = GameState::PLAY;
 }
@@ -50,12 +51,14 @@ void MainGame::draw() {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	program.use();
+	GLuint timeLocation = program.getUniformLocation("time");
+	glUniform1f(timeLocation, time);
+	time += 0.02;
 	sprite.draw();
 	sprite2.draw();
 	program.unuse();
 	//si tengo elementos actualizo
 	SDL_GL_SwapWindow(window);
-	cout << "TESTING";
 }
 
 void MainGame::run() {
