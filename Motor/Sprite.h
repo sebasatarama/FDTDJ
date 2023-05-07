@@ -1,13 +1,13 @@
 #pragma once
 #include <GL/glew.h>
+using namespace std;
 class Sprite
 {
 private:
 	float x;
 	float y;
-	int width;
-	int height;
-	float vertexData;
+	float width;
+	float height;
 	GLuint vboID;
 public:
 	Sprite();
