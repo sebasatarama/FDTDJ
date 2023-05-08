@@ -4,7 +4,6 @@
 using namespace std;
 
 MainGame::MainGame() {
-	window = nullptr;
 	width = 800;
 	time = 0;
 	height = 600;
@@ -31,13 +30,7 @@ void MainGame::processInput() {
 
 void MainGame::init() {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	window = SDL_CreateWindow("Hola", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
-			width, height, SDL_WINDOW_OPENGL);
-	
-	if (window == nullptr) {
-		fatalError("SDL not initialized");
-	}
-	SDL_GLContext glContext = SDL_GL_CreateContext(window);
+	window.create("Hola", width, height, 0);
 	GLenum error = glewInit();
 	if (error != GLEW_OK) {
 		fatalError("Glew not initialized");
@@ -51,20 +44,20 @@ void MainGame::draw() {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	program.use();
+	glActiveTexture(GL_TEXTURE0);
 	GLuint timeLocation = program.getUniformLocation("time");
 	glUniform1f(timeLocation, time);
-	time += 0.02;
+	time += 0.2;
+	GLuint imageLocation = program.getUniformLocation("myImage");
+	glUniform1i(imageLocation, 0);
 	sprite.draw();
-	sprite2.draw();
 	program.unuse();
-	//si tengo elementos actualizo
-	SDL_GL_SwapWindow(window);
+	window.swapWindow();
 }
 
 void MainGame::run() {
 	init();
-	sprite.init(-1, -1, 1, 1);
-	sprite2.init(0, 0, 1, 1);
+	sprite.init(-1, -1, 1, 1, "Textures/imagen.png");
 	update();
 }
 
@@ -79,5 +72,6 @@ void MainGame::initShaders() {
 	program.compileShaders("Shaders/colorShaderVert.txt", "Shaders/colorShaderFrag.txt");
 	program.addAtribute("vertexPosition");
 	program.addAtribute("vertexColor");
+	program.addAtribute("vertexUV");
 	program.linkShader();
 }
