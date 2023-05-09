@@ -4,6 +4,8 @@
 #include "Sprite.h"
 #include "HLSLProgram.h"
 #include "Window.h"
+#include "Camera2D.h"
+#include "InputManager.h"
 
 enum class GameState {
 	PLAY,EXIT
@@ -16,11 +18,14 @@ private:
 	int height;
 	float time;
 	Window window;
+	InputManager inputManager;
 	void init();
 	HLSLProgram program;
 	Sprite sprite;
+	Camera2D camera2D;
 	void processInput();
 	void initShaders();
+	void handleInput();
 
 public:
 	MainGame();

@@ -8,6 +8,7 @@ MainGame::MainGame() {
 	time = 0;
 	height = 600;
 	gameState = GameState::PLAY;
+	camera2D.init(width, height);
 }
 
 MainGame::~MainGame() {
@@ -22,10 +23,17 @@ void MainGame::processInput() {
 				gameState = GameState::EXIT;
 				break;
 			case SDL_MOUSEMOTION:
-				//cout << event.motion.x << " , " << event.motion.y << endl;
+				inputManager.setMouseCoords(event.motion.x, event.motion.y);
+				break;
+			case SDL_KEYUP:
+				inputManager.releaseKey(event.key.keysym.sym);
+				break;
+			case SDL_KEYDOWN:
+				inputManager.pressKey(event.key.keysym.sym);
 				break;
 		}
 	}
+	handleInput();
 }
 
 void MainGame::init() {
@@ -47,7 +55,10 @@ void MainGame::draw() {
 	glActiveTexture(GL_TEXTURE0);
 	GLuint timeLocation = program.getUniformLocation("time");
 	glUniform1f(timeLocation, time);
-	time += 0.2;
+	time += 0.02;
+	glm::mat4 cameraMatrix = camera2D.getCameraMatrix();
+	GLuint pCameraLocation = program.getUniformLocation("pCamera");
+	glUniformMatrix4fv(pCameraLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
 	GLuint imageLocation = program.getUniformLocation("myImage");
 	glUniform1i(imageLocation, 0);
 	sprite.draw();
@@ -74,4 +85,19 @@ void MainGame::initShaders() {
 	program.addAtribute("vertexColor");
 	program.addAtribute("vertexUV");
 	program.linkShader();
+}
+
+void MainGame::handleInput(){
+	if (inputManager.isKeyPressed(SDLK_w)) {
+		cout << "Presionando letra W" << endl;
+	}
+	if (inputManager.isKeyPressed(SDLK_a)) {
+		cout << "Presionando letra A" << endl;
+	}
+	if (inputManager.isKeyPressed(SDLK_s)) {
+		cout << "Presionando letra S" << endl;
+	}
+	if (inputManager.isKeyPressed(SDLK_d)) {
+		cout << "Presionando letra D" << endl;
+	}
 }
