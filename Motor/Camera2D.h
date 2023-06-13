@@ -1,5 +1,6 @@
 #pragma once
 #include <glm\gtc\matrix_transform.hpp>
+
 class Camera2D
 {
 private:
@@ -12,15 +13,19 @@ private:
 	glm::mat4 orthoMatrix;
 public:
 	void update();
-	void init(int screenWidth, int screenHeight);
+	void init(int screenWidth,int screenHeight);
 	glm::vec2 getPosition() {
 		return position;
+	}
+	glm::vec2 convertToScreenWorld(glm::vec2 screenScords);
+	float getScale() {
+		return scale;
 	}
 	void setPosition(const glm::vec2& newPosition) {
 		position = newPosition;
 		needsUpdateMatrix = true;
 	}
-	void SetScale(float newScale) {
+	void setScale(float newScale) {
 		scale = newScale;
 		needsUpdateMatrix = true;
 	}

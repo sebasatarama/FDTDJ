@@ -7,5 +7,6 @@ class ImageLoader
 {
 public:
 	static GLTexture loadPNG(string filePath);
+
 };
 

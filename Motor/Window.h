@@ -5,11 +5,11 @@
 
 using namespace std;
 enum WindowFlags {
-	INVISIBLE = 0X1,
-	FULLSCREEN = 0X2,
-	BORDERLESS = 0X4,
-};
 
+	INVISIBLE = 0x1,
+	FULLSCREEN = 0x2,
+	BORDERLESS = 0x4
+};
 class Window
 {
 private:
@@ -20,13 +20,13 @@ public:
 	Window();
 	~Window();
 	void swapWindow();
-	int getScreemWidth() {
+	int getScreenWidth() {
 		return screenWidth;
 	}
 	int getScreenHeight() {
 		return screenHeight;
 	}
-	int create(string windowNmae, int screenWidth, int screenHeight, unsigned int currentFlags);
-
+	int create(string windowName, int screenWidth, int screenHeight,
+		unsigned int currentFlags);
 };
 

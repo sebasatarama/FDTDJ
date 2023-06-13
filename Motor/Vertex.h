@@ -46,4 +46,3 @@ struct Vertex {
 		uv.set(u, v);
 	}
 };
-
