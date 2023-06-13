@@ -18,6 +18,9 @@ public:
 	int getNumHumans()const {
 		return numHumans;
 	}
+	int getNumZombies()const {
+		return zombiesPosition.size();
+	}
 	glm::vec2 getPlayerPosition()const {
 		return playerPosition;
 	}
