@@ -59,6 +59,11 @@ void MainGame::handleInput()
 	if (inputManager.isKeyPressed(SDLK_e)) {
 		camera2D.setScale(camera2D.getScale() - SCALE_SPEED);
 	}
+
+	if (inputManager.isKeyPressed(SDLK_f)) {
+		cout << "H: "<<humans.size()<<", Z: "<<zombies.size()<<"\n";
+	}
+
 	if (inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {
 		//cout << "CLICK IZQUIERDO" << endl;
 		createBullet();
